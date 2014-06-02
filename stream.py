@@ -83,8 +83,8 @@ def make_temp_graph(temp_log):
         thistemps = temps[name]
         extra = (TEMP_LOG_SIZE - len(thistemps[0]))
         idxs = range(extra, extra + len(thistemps[0]))
-        pylab.plot(idxs, thistemps[0], linewidth = LINEWIDTH)
-        pylab.plot(idxs, thistemps[1], '-', linewidth = LINEWIDTH)
+        pylab.plot(idxs, thistemps[0], '-', linewidth = LINEWIDTH)
+        pylab.plot(idxs, thistemps[1], '--', linewidth = LINEWIDTH)
 
     ax.get_xaxis().set_ticks([])
     for item in ax.get_xticklabels() + ax.get_yticklabels():
