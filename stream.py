@@ -126,7 +126,7 @@ class StatusHandler(object):
         raise
         status_text = "Printer offline"
       overlay.set_property("text", status_text.strip())
-      self.timer = threading.Timer(1.0, self.update_status)
+      self.timer = threading.Timer(3.0, self.update_status)
       self.timer.start()
 
   def stop(self):
