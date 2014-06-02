@@ -120,6 +120,8 @@ class StatusHandler(object):
               graphoverlay.set_property("data", graphsvg)
               #print >> sys.stderr, len(self.temp_log), graphsvg
               status_text += "Temps: H: %s/%s, B: %s/%s\n" % (temps["T"][0], temps["T"][1], temps["B"][0], temps["B"][1])
+          if status["z"] is not None:
+              status_text += "Z = %s\n" % status["z"]
           if not status_text:
             status_text = "Printer online"
       except:
