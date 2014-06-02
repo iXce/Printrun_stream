@@ -109,7 +109,7 @@ class StatusHandler(object):
               status_text += "Printing %s\n" % os.path.basename(status["filename"])
           if status["eta"] is not None:
               secondsremain, secondsestimate, progress = status["eta"]
-              status_text += "Est: %s of %s remaining" % (format_duration(secondsremain),
+              status_text += "Est: %s of %s remaining\n" % (format_duration(secondsremain),
                                                           format_duration(secondsestimate))
           if status["temps"] is not None:
               temps = status["temps"]
