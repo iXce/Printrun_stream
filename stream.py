@@ -65,34 +65,36 @@ def make_temp_graph(temp_log):
     pylab.rcParams['ytick.major.pad'] = '20'
     fig = pylab.figure(figsize = (10, 10))
 
-    fig.patch.set_facecolor('gray')
-    fig.patch.set_alpha(0.4)
+    try:
+        fig.patch.set_facecolor('gray')
+        fig.patch.set_alpha(0.4)
 
-    ax = fig.add_subplot(1, 1, 1)
-    for child in ax.get_children():
-        if isinstance(child, mpl.spines.Spine):
-            child.set_color('#dddddd')
-    ax.tick_params(axis='y', colors='white')
+        ax = fig.add_subplot(1, 1, 1)
+        for child in ax.get_children():
+            if isinstance(child, mpl.spines.Spine):
+                child.set_color('#dddddd')
+        ax.tick_params(axis='y', colors='white')
 
-    ax.patch.set_facecolor('gray')
-    ax.patch.set_alpha(0.2)
+        ax.patch.set_facecolor('gray')
+        ax.patch.set_alpha(0.2)
 
-    pylab.xlim([0, TEMP_LOG_SIZE])
-    pylab.ylim([0, 300])
-    for name in tempnames:
-        thistemps = temps[name]
-        extra = (TEMP_LOG_SIZE - len(thistemps[0]))
-        idxs = range(extra, extra + len(thistemps[0]))
-        pylab.plot(idxs, thistemps[0], '-', linewidth = LINEWIDTH)
-        pylab.plot(idxs, thistemps[1], '--', linewidth = LINEWIDTH)
+        pylab.xlim([0, TEMP_LOG_SIZE])
+        pylab.ylim([0, 300])
+        for name in tempnames:
+            thistemps = temps[name]
+            extra = (TEMP_LOG_SIZE - len(thistemps[0]))
+            idxs = range(extra, extra + len(thistemps[0]))
+            pylab.plot(idxs, thistemps[0], '-', linewidth = LINEWIDTH)
+            pylab.plot(idxs, thistemps[1], '--', linewidth = LINEWIDTH)
 
-    ax.get_xaxis().set_ticks([])
-    for item in ax.get_xticklabels() + ax.get_yticklabels():
-        item.set_fontsize(30)
+        ax.get_xaxis().set_ticks([])
+        for item in ax.get_xticklabels() + ax.get_yticklabels():
+            item.set_fontsize(30)
 
-    svg = cStringIO.StringIO()
-    fig.savefig(svg, format = 'svg', bbox_inches = 'tight', pad_inches = 0.1, facecolor = fig.get_facecolor())
-    pylab.close(fig)
+        svg = cStringIO.StringIO()
+        fig.savefig(svg, format = 'svg', bbox_inches = 'tight', pad_inches = 0.1, facecolor = fig.get_facecolor())
+    finally:
+        pylab.close(fig)
     return svg.getvalue()
 
 class StatusHandler(object):
